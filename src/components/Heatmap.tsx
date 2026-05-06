@@ -70,96 +70,118 @@ export default function Heatmap({ data }: HeatmapProps) {
 
   const CELL = 52;
   const GAP = 8; // visual gap between cells so they don't bleed together
+  const Y_AXIS_WIDTH = 96;
 
   return (
     <div
-      className="overflow-auto brutal-border bg-obsidian p-5"
+      className="brutal-border bg-obsidian p-5 relative"
       data-testid="matchup-heatmap"
     >
-      <table
-        className="border-separate mono text-[11px]"
-        style={{ borderSpacing: `${GAP}px`, background: "#0a0a0a" }}
-      >
-        <thead>
-          <tr>
-            <th
-              className="text-muted-foreground uppercase tracking-wider text-left sticky left-0 bg-obsidian z-10"
-              style={{ minWidth: 88, padding: "0 8px" }}
-            />
-            {teamNames.map((t: string) => (
-              <th
-                key={t}
-                className="text-muted-foreground uppercase tracking-wider align-bottom"
-                style={{ minWidth: CELL, height: 72, padding: 0 }}
-              >
-                <div
-                  className="origin-bottom-left whitespace-nowrap mono text-[10px]"
-                  style={{
-                    transform: "rotate(-45deg) translate(4px, -6px)",
-                    width: CELL,
-                  }}
-                >
-                  {displayTeam(t)}
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {teamNames.map((rowTeam: string) => (
-            <tr key={rowTeam}>
-              <th
-                className="text-left text-muted-foreground uppercase tracking-wider sticky left-0 bg-obsidian z-10 font-normal"
-                style={{ padding: "0 8px", whiteSpace: "nowrap" }}
-              >
-                {displayTeam(rowTeam)}
-              </th>
-              {teamNames.map((colTeam: string) => {
-                if (rowTeam === colTeam) {
-                  return (
-                    <td
-                      key={colTeam}
-                      className="text-center"
+      <div className="flex">
+        {/* Fixed Y-axis column */}
+        <div className="shrink-0 bg-obsidian z-20" style={{ width: Y_AXIS_WIDTH }}>
+          <table
+            className="border-separate mono text-[11px]"
+            style={{ borderSpacing: `${GAP}px`, background: "#0a0a0a" }}
+          >
+            <thead>
+              <tr>
+                <th style={{ height: 72, minWidth: Y_AXIS_WIDTH - 16 }} />
+              </tr>
+            </thead>
+            <tbody>
+              {teamNames.map((rowTeam: string) => (
+                <tr key={rowTeam}>
+                  <th
+                    className="text-left text-muted-foreground uppercase tracking-wider font-normal whitespace-nowrap"
+                    style={{ padding: "0 8px", height: CELL }}
+                  >
+                    {displayTeam(rowTeam)}
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Scrollable matrix area */}
+        <div className="overflow-auto flex-1">
+          <table
+            className="border-separate mono text-[11px] w-max"
+            style={{ borderSpacing: `${GAP}px`, background: "#0a0a0a" }}
+          >
+            <thead>
+              <tr>
+                {teamNames.map((t: string) => (
+                  <th
+                    key={t}
+                    className="text-muted-foreground uppercase tracking-wider align-bottom"
+                    style={{ minWidth: CELL, height: 72, padding: 0 }}
+                  >
+                    <div
+                      className="origin-bottom-left whitespace-nowrap mono text-[10px]"
                       style={{
-                        background: "#0a0a0a",
+                        transform: "rotate(-45deg) translate(4px, -6px)",
                         width: CELL,
-                        height: CELL,
                       }}
                     >
-                      <span className="text-[#222]">—</span>
-                    </td>
-                  );
-                }
-                const key = [rowTeam, colTeam].sort().join("|");
-                const count = lookup[key] || 0;
-                const isRival = rivalPairs.has(key);
-                const { bg, text, label } = cellStyle(count, isRival);
-                const title = `${displayTeam(rowTeam)} vs ${displayTeam(
-                  colTeam
-                )}: ${count} game${count === 1 ? "" : "s"}${
-                  isRival ? " (Rival)" : ""
-                }`;
-                return (
-                  <td
-                    key={colTeam}
-                    title={title}
-                    className="text-center font-bold tabular-nums"
-                    style={{
-                      background: bg,
-                      color: text,
-                      width: CELL,
-                      height: CELL,
-                    }}
-                    data-testid={`heatmap-cell-${rowTeam}-${colTeam}`}
-                  >
-                    {label}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                      {displayTeam(t)}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {teamNames.map((rowTeam: string) => (
+                <tr key={rowTeam}>
+                  {teamNames.map((colTeam: string) => {
+                    if (rowTeam === colTeam) {
+                      return (
+                        <td
+                          key={colTeam}
+                          className="text-center"
+                          style={{
+                            background: "#0a0a0a",
+                            width: CELL,
+                            height: CELL,
+                          }}
+                        >
+                          <span className="text-[#222]">—</span>
+                        </td>
+                      );
+                    }
+                    const key = [rowTeam, colTeam].sort().join("|");
+                    const count = lookup[key] || 0;
+                    const isRival = rivalPairs.has(key);
+                    const { bg, text, label } = cellStyle(count, isRival);
+                    const title = `${displayTeam(rowTeam)} vs ${displayTeam(
+                      colTeam
+                    )}: ${count} game${count === 1 ? "" : "s"}${
+                      isRival ? " (Rival)" : ""
+                    }`;
+                    return (
+                      <td
+                        key={colTeam}
+                        title={title}
+                        className="text-center font-bold tabular-nums"
+                        style={{
+                          background: bg,
+                          color: text,
+                          width: CELL,
+                          height: CELL,
+                        }}
+                        data-testid={`heatmap-cell-${rowTeam}-${colTeam}`}
+                      >
+                        {label}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <div className="flex flex-wrap items-center gap-5 pt-5 mt-4 border-t border-[#222] text-[10px] mono uppercase tracking-wider text-muted-foreground">
         <Legend color="#101010" label="0 games" />

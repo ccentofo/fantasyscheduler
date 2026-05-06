@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Fantasy Football Scheduler - Common Questions Answered</title>
+  <meta name="description" content="Frequently asked questions about Fantasy Football Scheduler. Learn how rivalry weeks work, supported league sizes, schedule randomization, and more.">
+  <meta name="keywords" content="fantasy football schedule, fantasy football scheduler FAQ, rivalry weeks, 10 team league schedule, 12 team league schedule, 14 team league schedule, fantasy football bye weeks">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Fantasy Football Scheduler free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Fantasy Football Scheduler is completely free. There are no premium tiers, no feature locks, and no hidden costs. We support the tool through non-intrusive advertising."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What league sizes does the scheduler support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We support 8, 10, 12, 14, and 16-team leagues. Our algorithms automatically adjust to ensure balanced matchups regardless of your league size."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are rivalry weeks handled?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can designate specific team pairings as rivalries and assign them to particular weeks. The scheduler locks these matchups in place first, then builds the rest of the schedule around them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the schedule randomized or deterministic?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each schedule generation uses randomization to create variety, but within mathematical constraints that ensure fairness. You can regenerate as many times as you like until you find a schedule you love."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f5f5f5;
+      --muted: #a1a1aa;
+      --accent: #3b82f6;
+      --green: #22c55e;
+      --border: #27272a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.125rem;
+      margin-bottom: 2.5rem;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+    .faq-question {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .faq-question::before {
+      content: "Q";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.75rem;
+      height: 1.75rem;
+      background: var(--accent);
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .faq-answer {
+      color: var(--muted);
+      padding-left: 2.5rem;
+      font-size: 1rem;
+    }
+    .faq-answer p {
+      margin-bottom: 0.75rem;
+    }
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+    .faq-answer ul {
+      padding-left: 1.25rem;
+      margin: 0.75rem 0;
+    }
+    .faq-answer li {
+      margin-bottom: 0.5rem;
+    }
+    .faq-answer strong {
+      color: var(--fg);
+    }
+    .highlight {
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 3px solid var(--accent);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.9375rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-size: 0.875rem;
+    }
+    .cta-section {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(34, 197, 94, 0.15) 100%);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .cta-section p {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .cta {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.875rem 2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .cta:hover {
+      opacity: 0.9;
+      text-decoration: none;
+    }
+    @media (max-width: 640px) {
+      h1 { font-size: 1.75rem; }
+      body { padding: 1rem; }
+      .faq-question { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">← Back to Scheduler</a>
+    
+    <h1>Frequently Asked Questions</h1>
+    <p class="subtitle">Everything you need to know about creating the perfect fantasy football schedule.</p>
+
+    <div class="faq-item">
+      <h2 class="faq-question">Is Fantasy Football Scheduler free to use?</h2>
+      <div class="faq-answer">
+        <p><strong>Yes, completely free.</strong> There are no premium tiers, no feature locks, and no hidden costs. Every feature—including rivalry weeks, custom team names, and unlimited schedule generations—is available to everyone.</p>
+        <p>We keep the tool free by displaying non-intrusive advertisements. We believe every fantasy commissioner deserves access to quality scheduling tools, regardless of budget.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">What league sizes does the scheduler support?</h2>
+      <div class="faq-answer">
+        <p>We support the most common fantasy football league configurations:</p>
+        <ul>
+          <li><strong>8-team leagues</strong> – Great for smaller, competitive groups</li>
+          <li><strong>10-team leagues</strong> – The classic standard format</li>
+          <li><strong>12-team leagues</strong> – The most popular size for serious leagues</li>
+          <li><strong>14-team leagues</strong> – For deeper roster challenges</li>
+          <li><strong>16-team leagues</strong> – Maximum competition, maximum strategy</li>
+        </ul>
+        <p>Our algorithms automatically adjust matchup distribution based on your league size to ensure every team faces opponents fairly throughout the season.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">How are rivalry weeks handled?</h2>
+      <div class="faq-answer">
+        <p>Rivalry weeks let you lock in specific matchups for specific weeks—perfect for those grudge matches that need to happen at just the right time.</p>
+        <p><strong>Here's how it works:</strong></p>
+        <ul>
+          <li>Designate team pairings as "rivals" (e.g., Team A vs. Team B)</li>
+          <li>Assign each rivalry to a specific week (e.g., Week 1, Thanksgiving week, etc.)</li>
+          <li>The scheduler locks these matchups first, then builds the rest of the schedule around them</li>
+        </ul>
+        <div class="highlight">
+          <strong>Pro Tip:</strong> Many commissioners use rivalry weeks for Thanksgiving matchups, season openers, or the final week of the regular season for maximum drama.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">Is the schedule randomized or deterministic?</h2>
+      <div class="faq-answer">
+        <p><strong>It's randomized within fair constraints.</strong> Each time you generate a schedule, you'll get a different result—but every result follows the same fairness rules:</p>
+        <ul>
+          <li>Every team plays the same number of games</li>
+          <li>Matchup distribution is balanced (teams face each other an equal number of times where possible)</li>
+          <li>Rivalry constraints are always respected</li>
+        </ul>
+        <p>Don't like the schedule you got? Just hit "Generate" again. You can regenerate as many times as you want until you find a schedule that feels right for your league.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">How does the scheduler handle bye weeks?</h2>
+      <div class="faq-answer">
+        <p>Our scheduler is designed with NFL bye weeks in mind. When configuring your schedule, you can specify:</p>
+        <ul>
+          <li><strong>Season length</strong> – Typically 14-17 weeks for regular season</li>
+          <li><strong>Playoff weeks</strong> – Excluded from regular season matchups</li>
+        </ul>
+        <p>The algorithm distributes matchups evenly across your specified weeks, ensuring no team has an unfair concentration of tough matchups during heavy bye weeks.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">Can I customize team names?</h2>
+      <div class="faq-answer">
+        <p><strong>Absolutely.</strong> You can enter custom team names for every team in your league. This makes the generated schedule immediately usable—just copy it into your league platform or share it with your league mates.</p>
+        <p>If you don't want to enter names, we'll use default labels (Team 1, Team 2, etc.) that you can replace later.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">What makes a "good" fantasy football schedule?</h2>
+      <div class="faq-answer">
+        <p>A well-designed fantasy schedule has several key characteristics:</p>
+        <ul>
+          <li><strong>Balance:</strong> Every team faces opponents an equal number of times (or as close as mathematically possible)</li>
+          <li><strong>Variety:</strong> No team plays the same opponent in back-to-back weeks</li>
+          <li><strong>Fairness:</strong> Tough matchups are distributed evenly, not clustered</li>
+          <li><strong>Drama:</strong> Rivalry games and key matchups land on meaningful weeks</li>
+        </ul>
+        <p>Our algorithms optimize for all of these factors, using round-robin scheduling principles adapted for fantasy football's unique requirements.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">Do I need to create an account?</h2>
+      <div class="faq-answer">
+        <p><strong>No account required.</strong> Fantasy Football Scheduler works entirely in your browser. Enter your league configuration, generate your schedule, and you're done.</p>
+        <p>Your settings are saved locally in your browser, so if you come back later, your configuration will still be there. But we never require sign-ups, emails, or personal information to use the tool.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">Can I export or share my schedule?</h2>
+      <div class="faq-answer">
+        <p>Yes! Once your schedule is generated, you can:</p>
+        <ul>
+          <li><strong>Copy to clipboard</strong> – Paste directly into your league chat or platform</li>
+          <li><strong>View week-by-week</strong> – See matchups organized by week for easy reference</li>
+          <li><strong>Screenshot or print</strong> – The schedule view is designed to be clean and readable</li>
+        </ul>
+        <p>We're also working on direct export to CSV and integration with popular fantasy platforms—stay tuned!</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">What if I have a question that's not answered here?</h2>
+      <div class="faq-answer">
+        <p>We'd love to hear from you! Reach out to us at <a href="mailto:support@fantasyfootballscheduler.com">support@fantasyfootballscheduler.com</a> with your question, feedback, or feature request.</p>
+        <p>We're fantasy commissioners ourselves, so we understand the challenges you face. If there's something we can add to make your life easier, let us know.</p>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Ready to Build Your Schedule?</h2>
+      <p>Stop wrestling with spreadsheets. Generate a balanced, fair schedule in seconds.</p>
+      <a href="/" class="cta">Generate Your Schedule →</a>
+    </div>
+
+    <p style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.875rem;">
+      <a href="/">Home</a> · <a href="/about.html">About Us</a> · <a href="/privacy-policy.html">Privacy Policy</a>
+    </p>
+  </div>
+</body>
+</html>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Settings as SettingsIcon } from "lucide-react";
 import ScheduleForm from "./ScheduleForm";
 import { type SchedulePayload } from "@/lib/api";
 import ResultsView, { type ScheduleData } from "./ResultsView";
@@ -8,10 +7,8 @@ import WeeklyGrid from "./WeeklyGrid";
 import TeamsView from "./TeamsView";
 import Heatmap from "./Heatmap";
 import ConnectionStatus from "./ConnectionStatus";
-import SettingsDialog from "./SettingsDialog";
 import EmptyState from "./EmptyState";
 import BottomNav, { type TabId } from "./BottomNav";
-import { Button } from "@/components/ui/button";
 import { generateSchedule, parseApiError } from "@/lib/api";
 
 const MOBILE_TAB_LABELS: Record<string, string> = {
@@ -19,8 +16,6 @@ const MOBILE_TAB_LABELS: Record<string, string> = {
   teams: "By Team",
   heatmap: "Frequency Matrix",
 };
-
-const FORCE_MOBILE_LS = "ff_force_mobile";
 
 function useIsNarrowScreen(): boolean {
   const [narrow, setNarrow] = useState(() => {
@@ -40,24 +35,12 @@ export default function Scheduler() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ScheduleData | null>(null);
-  const [statusBump, setStatusBump] = useState(0);
   const [formKey, setFormKey] = useState(0);
   const [initialSeed, setInitialSeed] = useState("");
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState<TabId | "builder">("builder");
-  const [forceMobile, setForceMobile] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.localStorage.getItem(FORCE_MOBILE_LS) === "1";
-  });
 
   const narrow = useIsNarrowScreen();
-  const isMobileLayout = forceMobile || narrow;
-
-  const updateForceMobile = (val: boolean) => {
-    setForceMobile(val);
-    if (val) window.localStorage.setItem(FORCE_MOBILE_LS, "1");
-    else window.localStorage.removeItem(FORCE_MOBILE_LS);
-  };
+  const isMobileLayout = narrow;
 
   const onGenerate = async (payload: SchedulePayload) => {
     setLoading(true);
@@ -92,19 +75,19 @@ export default function Scheduler() {
   );
 
   return (
-    <div className="min-h-screen w-full">
-      {/* Header — compact */}
-      <header className="border-b border-[#1f1f1f] bg-obsidian/70 backdrop-blur sticky top-0 z-40">
-        <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 bg-giants flex items-center justify-center shrink-0">
-              <span className="font-display text-2xl leading-none text-white">
+    <div className="h-screen w-full flex flex-col overflow-hidden">
+      {/* Header */}
+      <header className="border-b border-[#1f1f1f] bg-obsidian/70 backdrop-blur z-40 shrink-0">
+        <div className="w-full px-6 lg:px-10 py-4 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4 min-w-0">
+            <div className="w-12 h-12 lg:w-14 lg:h-14 bg-giants flex items-center justify-center shrink-0">
+              <span className="font-display text-3xl lg:text-4xl leading-none text-white">
                 FF
               </span>
             </div>
             <div className="min-w-0 leading-tight">
               <h1
-                className="font-display text-lg sm:text-xl uppercase tracking-wide leading-none truncate"
+                className="font-display text-xl sm:text-2xl lg:text-3xl uppercase tracking-wide leading-none truncate"
                 data-testid="app-title"
               >
                 <span className="sm:hidden">FF Scheduler</span>
@@ -112,21 +95,13 @@ export default function Scheduler() {
                   Fantasy Football Scheduler
                 </span>
               </h1>
-              <p className="hidden md:block text-[9px] mono uppercase tracking-[0.25em] text-muted-foreground mt-0.5">
+              <p className="hidden md:block text-xs lg:text-sm mono uppercase tracking-[0.25em] text-muted-foreground mt-1">
                 Commissioner Control Room
               </p>
             </div>
-            {forceMobile && !narrow && (
-              <span
-                className="ml-2 px-2 py-1 text-[9px] mono uppercase tracking-[0.2em] border border-giants text-giants"
-                data-testid="mobile-sim-badge"
-              >
-                Mobile Sim
-              </span>
-            )}
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <ConnectionStatus bump={statusBump} />
+            <ConnectionStatus />
             <span
               className="text-eagles font-display text-2xl leading-none select-none px-1 hidden sm:inline"
               aria-hidden="true"
@@ -134,41 +109,18 @@ export default function Scheduler() {
             >
               ★
             </span>
-            {isMobileLayout ? (
-              <Button
-                variant="outline"
-                onClick={() => setSettingsOpen(true)}
-                className="rounded-none border-[#333] hover:border-giants hover:text-giants bg-carbon h-10 w-10 p-0"
-                aria-label="Settings"
-                data-testid="open-settings-btn-mobile"
-              >
-                <SettingsIcon className="w-4 h-4" />
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                onClick={() => setSettingsOpen(true)}
-                className="rounded-none border-[#333] hover:border-giants hover:text-giants bg-carbon uppercase tracking-wider text-xs font-bold h-10 px-3"
-                data-testid="open-settings-btn"
-              >
-                <SettingsIcon className="w-4 h-4 mr-1.5" />
-                Settings
-              </Button>
-            )}
           </div>
         </div>
       </header>
 
       <main
-        className={`max-w-[1700px] mx-auto px-4 sm:px-6 py-5 ${
-          isMobileLayout ? "pb-24" : "pb-8"
+        className={`flex-1 w-full px-6 lg:px-10 py-4 overflow-hidden ${
+          isMobileLayout ? "pb-20" : "pb-4"
         }`}
       >
         {isMobileLayout ? (
           /* MOBILE layout — single view + bottom nav */
-          <div
-            className={`space-y-5 ${forceMobile && !narrow ? "max-w-[480px] mx-auto" : ""}`}
-          >
+          <div className="h-full overflow-y-auto space-y-5">
             {mobileTab === "builder" && formNode}
 
             {mobileTab !== "builder" && !result && (
@@ -190,45 +142,54 @@ export default function Scheduler() {
           </div>
         ) : (
           /* DESKTOP layout — side-by-side */
-          <>
-            <div className="grid grid-cols-[400px_minmax(0,1fr)] gap-6">
-              <aside className="sticky top-[64px] self-start">{formNode}</aside>
-              <section className="h-full">
-                {result ? (
-                  <ResultsView data={result} onReuseSeed={onReuseSeed} />
-                ) : (
-                  <EmptyState />
-                )}
-              </section>
-            </div>
-            {/* <footer className="mt-10 pt-5 border-t border-[#1f1f1f] text-[11px] mono text-muted-foreground flex flex-wrap gap-4 items-center justify-between">
-              <span className="uppercase tracking-[0.2em]">
-                UI talks directly to your Docker container
-              </span>
-              <span>
-                Default base{" "}
-                <span className="text-giants">http://localhost:8000</span>
-              </span>
-            </footer> */}
-          </>
+          <div className="grid grid-cols-[minmax(420px,28%)_minmax(0,1fr)] gap-8 h-full">
+            <aside className="h-full overflow-y-auto">{formNode}</aside>
+            <section className="h-full overflow-y-auto">
+              {result ? (
+                <ResultsView data={result} onReuseSeed={onReuseSeed} />
+              ) : (
+                <EmptyState />
+              )}
+            </section>
+          </div>
         )}
       </main>
+
+      {/* Footer with navigation links */}
+      <footer className="border-t border-[#1f1f1f] bg-obsidian/70 backdrop-blur shrink-0">
+        <div className="w-full px-6 lg:px-10 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs mono">
+          <a
+            href="/about.html"
+            className="text-muted-foreground hover:text-giants transition-colors uppercase tracking-[0.15em]"
+            data-testid="footer-about"
+          >
+            About Us
+          </a>
+          <span className="text-[#333] hidden sm:inline" aria-hidden="true">|</span>
+          <a
+            href="/faq.html"
+            className="text-muted-foreground hover:text-giants transition-colors uppercase tracking-[0.15em]"
+            data-testid="footer-faq"
+          >
+            FAQ
+          </a>
+          <span className="text-[#333] hidden sm:inline" aria-hidden="true">|</span>
+          <a
+            href="/privacy-policy.html"
+            className="text-muted-foreground hover:text-giants transition-colors uppercase tracking-[0.15em]"
+            data-testid="footer-privacy"
+          >
+            Privacy Policy
+          </a>
+        </div>
+      </footer>
 
       {isMobileLayout && (
         <BottomNav
           active={mobileTab === "builder" ? "builder" : mobileTab}
           onChange={(id) => setMobileTab(id)}
-          onSettings={() => setSettingsOpen(true)}
         />
       )}
-
-      <SettingsDialog
-        open={settingsOpen}
-        onOpenChange={setSettingsOpen}
-        onSaved={() => setStatusBump((x) => x + 1)}
-        forceMobile={forceMobile}
-        onForceMobileChange={updateForceMobile}
-      />
     </div>
   );
 }

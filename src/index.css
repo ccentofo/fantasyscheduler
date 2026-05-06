@@ -13,7 +13,8 @@ body,
 #root {
     background: #0a0a0a;
     color: #f5f5f5;
-    min-height: 100%;
+    min-height: 100vh;
+    height: 100%;
 }
 
 body {
@@ -163,4 +164,17 @@ code,
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #444;
+}
+
+/* Mobile-specific fixes for horizontal scrolling containers */
+@media (max-width: 1023px) {
+    /* Ensure heatmap table scrolls properly */
+    [data-testid="matchup-heatmap"] {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Ensure heatmap scrollable area works on mobile */
+    [data-testid="matchup-heatmap"] .overflow-auto {
+        -webkit-overflow-scrolling: touch;
+    }
 }

@@ -4,7 +4,7 @@ import { checkHealth, getApiBase } from "@/lib/api";
 type ConnectionState = "checking" | "ok" | "fail";
 
 interface ConnectionStatusProps {
-  bump: number;
+  bump?: number;
 }
 
 interface HealthResponse {
@@ -46,22 +46,22 @@ export default function ConnectionStatus({ bump }: ConnectionStatusProps) {
 
   return (
     <div
-      className="flex items-center gap-3 px-3 py-2 bg-carbon border border-[#2a2a2a]"
+      className="flex items-center gap-3 px-4 py-2.5 bg-carbon border border-[#2a2a2a]"
       data-testid="api-status-indicator"
     >
       <span
-        className="inline-block w-2.5 h-2.5 pulse-dot"
+        className="inline-block w-3 h-3 pulse-dot"
         style={{ background: color }}
       />
       <div className="flex flex-col leading-tight">
         <span
-          className="text-[10px] tracking-[0.2em] text-muted-foreground mono"
+          className="text-xs tracking-[0.2em] text-muted-foreground mono"
           style={{ color }}
         >
           {label}
         </span>
         <span
-          className="text-[11px] text-muted-foreground mono truncate max-w-[220px]"
+          className="text-sm text-muted-foreground mono truncate max-w-[220px]"
           title={base}
           data-testid="api-status-base-url"
         >

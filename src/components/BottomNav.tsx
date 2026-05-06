@@ -1,4 +1,4 @@
-import { Sliders, CalendarDays, Users, Grid3x3, Settings, LucideIcon } from "lucide-react";
+import { Sliders, CalendarDays, Users, Grid3x3, LucideIcon } from "lucide-react";
 
 type TabId = "builder" | "weeks" | "teams" | "heatmap";
 
@@ -18,17 +18,16 @@ const TABS: Tab[] = [
 interface BottomNavProps {
   active: TabId;
   onChange: (id: TabId) => void;
-  onSettings: () => void;
 }
 
-export default function BottomNav({ active, onChange, onSettings }: BottomNavProps) {
+export default function BottomNav({ active, onChange }: BottomNavProps) {
   return (
     <nav
       className="fixed bottom-0 inset-x-0 z-40 bg-obsidian/95 backdrop-blur border-t border-[#222]"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       data-testid="mobile-bottom-nav"
     >
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-4">
         {TABS.map(({ id, label, Icon }) => {
           const isActive = active === id;
           return (
@@ -48,15 +47,6 @@ export default function BottomNav({ active, onChange, onSettings }: BottomNavPro
             </button>
           );
         })}
-        <button
-          type="button"
-          onClick={onSettings}
-          className="flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-none"
-          data-testid="bottom-nav-settings"
-        >
-          <Settings className="w-5 h-5" strokeWidth={1.75} />
-          <span>Settings</span>
-        </button>
       </div>
     </nav>
   );
