@@ -108,3 +108,6 @@ scheduler-ui/
 - **IBM Plex Mono** — labels, seed, API paths, data cells
 
 Imported via Google Fonts at the top of `src/index.css`.
+=======
+# fantasyscheduler
+Site to generate schedules for fantasy leagues with various restrictions/options
