@@ -2,14 +2,17 @@ import axios, { type AxiosInstance, type AxiosError } from "axios";
 
 const LS_KEY = "ff_scheduler_api_base";
 export const DEFAULT_BASE: string =
-  (typeof process !== "undefined" &&
-    (process as NodeJS.Process).env &&
-    (process as NodeJS.Process).env.REACT_APP_DEFAULT_API_BASE) ||
-  "http://localhost:8000";
+  process.env.REACT_APP_DEFAULT_API_BASE || "";
 
 export function getApiBase(): string {
   if (typeof window === "undefined") return DEFAULT_BASE;
-  return window.localStorage.getItem(LS_KEY) || DEFAULT_BASE;
+  const stored = window.localStorage.getItem(LS_KEY);
+  // Ignore cached localhost values or empty strings - always prefer env variable
+  if (!stored || stored.includes("localhost")) {
+    if (stored) window.localStorage.removeItem(LS_KEY);
+    return DEFAULT_BASE;
+  }
+  return stored;
 }
 
 export function setApiBase(url: string | null | undefined): void {

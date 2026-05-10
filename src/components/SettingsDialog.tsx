@@ -85,7 +85,7 @@ export default function SettingsDialog({
             <pre className="text-xs mono text-giants/90 overflow-x-auto whitespace-pre leading-relaxed">
 {`docker load -i scheduler.tar
 docker run -d -p 8000:8000 --name scheduler scheduler
-curl http://localhost:8000/health`}
+curl ${DEFAULT_BASE || '<API_BASE_URL>'}/health`}
             </pre>
             <a
               href={`${url}/apidocs`}

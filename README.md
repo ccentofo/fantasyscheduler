@@ -1,7 +1,6 @@
 # Fantasy Football Scheduler — UI
 
-A React + Tailwind frontend for the Fantasy Football Scheduler API
-(Docker container on `http://localhost:8000`).
+A React + Tailwind frontend for the Fantasy Football Scheduler API.
 
 ## Run locally
 
@@ -15,8 +14,8 @@ yarn install
 yarn start               # dev server on http://localhost:3000
 ```
 
-The UI talks directly to `http://localhost:8000` (your Docker container) from
-the browser. If the API is on a different port/host, click **Settings** in the
+The UI connects to the API endpoint specified by the `REACT_APP_DEFAULT_API_BASE`
+environment variable. If you need to change the API URL, click **Settings** in the
 top-right (desktop) or the **Settings** tab in the bottom nav (mobile) and
 update the base URL. It's persisted in localStorage.
 

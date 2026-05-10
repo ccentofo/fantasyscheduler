@@ -10,7 +10,7 @@ This is a **React frontend** for the Fantasy Football Scheduler API. It provides
 - Generate optimized schedules via a backend API
 - View and analyze results in multiple formats
 
-The UI communicates with a backend API (expected at `http://localhost:8000` by default) that handles the actual schedule generation logic.
+The UI communicates with a backend API (configured via the `REACT_APP_DEFAULT_API_BASE` environment variable) that handles the actual schedule generation logic.
 
 ---
 
@@ -151,7 +151,7 @@ All environment variables are optional. Key variables:
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `REACT_APP_DEFAULT_API_BASE` | `http://localhost:8000` | Default API endpoint |
+| `REACT_APP_DEFAULT_API_BASE` | (required) | Default API endpoint |
 | `PORT` | `3000` | Dev server port |
 | `BROWSER` | (opens browser) | Set to `none` to prevent auto-open |
 
