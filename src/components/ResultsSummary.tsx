@@ -98,7 +98,7 @@ export default function ResultsSummary({ data, onReuseSeed }: ResultsSummaryProp
             data-testid="download-json-btn"
           >
             <Download className="w-3.5 h-3.5 mr-1.5" />
-            Download JSON
+            Save Schedule
           </Button>
         </div>
       </div>

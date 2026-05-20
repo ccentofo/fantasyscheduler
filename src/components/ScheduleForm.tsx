@@ -75,11 +75,8 @@ export default function ScheduleForm({ onGenerate, loading, error }: ScheduleFor
       <div className="flex items-center justify-between">
         <div>
           <h2 className="font-display text-3xl lg:text-4xl uppercase tracking-wide leading-none">
-            Schedule Builder
+            Build Your Schedule
           </h2>
-          <p className="text-xs lg:text-sm mono uppercase tracking-[0.2em] text-muted-foreground mt-1.5">
-            League Commissioner Panel
-          </p>
         </div>
       </div>
 
@@ -225,7 +222,7 @@ export default function ScheduleForm({ onGenerate, loading, error }: ScheduleFor
               />
             ) : (
               <p className="text-sm mono text-muted-foreground leading-relaxed">
-                The API will auto-assign rival pairs.
+                We'll pair up rivals for you.
               </p>
             )}
           </>
@@ -244,7 +241,7 @@ export default function ScheduleForm({ onGenerate, loading, error }: ScheduleFor
           htmlFor="seed-input"
           className="text-xs lg:text-sm uppercase tracking-[0.2em] text-muted-foreground mono"
         >
-          Seed (Reproducibility)
+          Seed (same seed = same schedule)
         </Label>
         <div className="flex gap-3">
           <Input
@@ -305,7 +302,7 @@ export default function ScheduleForm({ onGenerate, loading, error }: ScheduleFor
         data-testid="generate-btn"
       >
         <Zap className="w-6 h-6 mr-2" />
-        {loading ? "Generating…" : "Generate Schedule"}
+        {loading ? "Generating…" : "Make My Schedule"}
       </Button>
     </div>
   );

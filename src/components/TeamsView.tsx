@@ -73,7 +73,7 @@ export default function TeamsView({ data }: TeamsViewProps) {
 
   if (!teamNames.length) {
     return (
-      <p className="text-muted-foreground mono text-sm">No teams to display.</p>
+      <p className="text-muted-foreground mono text-sm">Nothing here yet—generate a schedule first.</p>
     );
   }
 
@@ -108,7 +108,7 @@ export default function TeamsView({ data }: TeamsViewProps) {
             )}
           </div>
           <span className="text-[10px] mono text-muted-foreground shrink-0 ml-2">
-            {sortedWeeks.length} GP
+            {sortedWeeks.length} Games
           </span>
         </div>
         <div className="space-y-0.5">

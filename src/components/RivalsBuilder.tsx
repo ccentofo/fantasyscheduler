@@ -110,8 +110,7 @@ export default function RivalsBuilder({ teams, pairs, setPairs }: RivalsBuilderP
       </Button>
 
       <p className="text-[11px] mono text-muted-foreground leading-relaxed">
-        Enter pairs you want as rivals. Leave blank for auto-assign by the API.
-        Partial input is OK — the remainder will be auto-paired.
+        Add your rivalries below. Leave any blank and we'll match up the rest.
       </p>
     </div>
   );

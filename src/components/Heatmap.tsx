@@ -63,7 +63,7 @@ export default function Heatmap({ data }: HeatmapProps) {
   if (!teamNames.length) {
     return (
       <p className="text-muted-foreground mono text-sm">
-        No matchup data to display.
+        Generate a schedule to see the heatmap.
       </p>
     );
   }

@@ -95,9 +95,6 @@ export default function Scheduler() {
                   Fantasy Football Scheduler
                 </span>
               </h1>
-              <p className="hidden md:block text-xs lg:text-sm mono uppercase tracking-[0.25em] text-muted-foreground mt-1">
-                Commissioner Control Room
-              </p>
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">

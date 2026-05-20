@@ -21,9 +21,9 @@ export default function EmptyState({ onGoBuilder }: EmptyStateProps) {
       />
       <div className="relative z-10 w-full text-center space-y-8">
         <div className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase text-center">
-          <span className="block text-muted-foreground/70">Commissioner.</span>
-          <span className="block text-giants">Set the</span>
-          <span className="block">Schedule.</span>
+          <span className="block text-muted-foreground/70">Your League.</span>
+          <span className="block text-giants">Your Schedule.</span>
+          <span className="block">Let's Go.</span>
         </div>
 
         {onGoBuilder ? (
