@@ -50,7 +50,7 @@ export default function EmptyState({ onGoBuilder }: EmptyStateProps) {
               regular season weeks, optional Rival Week, and manual rival
               assignments. Teams never play each other more than twice—and never
               back-to-back. Configure your league on the left and hit{" "}
-              <span className="text-giantsBright">Generate Schedule</span> to
+              <span className="text-giantsBright">Make My Schedule</span> to
               create your matchups!
             </p>
             {/* <div className="inline-flex items-center gap-3 px-5 py-3 border border-[#333] bg-obsidian/60 mono text-sm text-muted-foreground">

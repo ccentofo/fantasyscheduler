@@ -80,11 +80,11 @@ export default function Scheduler() {
       <header className="border-b border-[#1f1f1f] bg-obsidian/70 backdrop-blur z-40 shrink-0">
         <div className="w-full px-6 lg:px-10 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4 min-w-0">
-            <div className="w-12 h-12 lg:w-14 lg:h-14 bg-giants flex items-center justify-center shrink-0">
-              <span className="font-display text-3xl lg:text-4xl leading-none text-white">
-                FF
-              </span>
-            </div>
+            <img
+              src="/logo.svg"
+              alt="Fantasy Schedule Maker"
+              className="w-12 h-12 lg:w-14 lg:h-14 shrink-0 rounded-lg"
+            />
             <div className="min-w-0 leading-tight">
               <h1
                 className="font-display text-xl sm:text-2xl lg:text-3xl uppercase tracking-wide leading-none truncate"
