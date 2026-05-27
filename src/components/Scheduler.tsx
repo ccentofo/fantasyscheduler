@@ -31,7 +31,11 @@ function useIsNarrowScreen(): boolean {
   return narrow;
 }
 
-export default function Scheduler() {
+interface SchedulerProps {
+  navigate: (to: string) => void;
+}
+
+export default function Scheduler({ navigate }: SchedulerProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ScheduleData | null>(null);
@@ -156,7 +160,8 @@ export default function Scheduler() {
       <footer className="border-t border-[#1f1f1f] bg-obsidian/70 backdrop-blur shrink-0">
         <div className="w-full px-6 lg:px-10 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs mono">
           <a
-            href="/about.html"
+            href="/about"
+            onClick={(e) => { e.preventDefault(); navigate("/about"); }}
             className="text-muted-foreground hover:text-giants transition-colors uppercase tracking-[0.15em]"
             data-testid="footer-about"
           >
@@ -164,7 +169,8 @@ export default function Scheduler() {
           </a>
           <span className="text-[#333] hidden sm:inline" aria-hidden="true">|</span>
           <a
-            href="/faq.html"
+            href="/faq"
+            onClick={(e) => { e.preventDefault(); navigate("/faq"); }}
             className="text-muted-foreground hover:text-giants transition-colors uppercase tracking-[0.15em]"
             data-testid="footer-faq"
           >
@@ -172,7 +178,8 @@ export default function Scheduler() {
           </a>
           <span className="text-[#333] hidden sm:inline" aria-hidden="true">|</span>
           <a
-            href="/privacy-policy.html"
+            href="/privacy-policy"
+            onClick={(e) => { e.preventDefault(); navigate("/privacy-policy"); }}
             className="text-muted-foreground hover:text-giants transition-colors uppercase tracking-[0.15em]"
             data-testid="footer-privacy"
           >
